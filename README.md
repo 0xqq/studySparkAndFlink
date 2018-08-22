@@ -33,6 +33,7 @@
    <td>node1</td>
   </tr>
 </table>
+
 > vim /app/opt/flink-1.6.0/conf/slaves
 
 &ensp;&ensp;<B>node1</B><br>
