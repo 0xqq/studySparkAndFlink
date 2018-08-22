@@ -1,4 +1,4 @@
-##一、Flink的安装部署-standalone
+## 一、Flink的安装部署-standalone
 1.下载flink，可以进入官网进行下载，flink是apache的顶级项目，越来越受到大家的熟悉。
 本文使用wget进行下载并且安装。<br>
 &ensp;&ensp;&ensp;&ensp;如下是命令操作【备注：java1.7以上，最好1.8+,免密ssh】:
