@@ -47,3 +47,4 @@
 4.启动flink集群和关闭flink集群
 > /app/opt/flink-1.6.0/bin/start-cluster.sh <br>
 >/app/opt/flink-1.6.0/bin/stop-***.sh
+## 二、运行wordcount实例
