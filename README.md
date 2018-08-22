@@ -35,9 +35,9 @@
 </table>
 > vim /app/opt/flink-1.6.0/conf/slaves
 
-&ensp;&ensp;<B>node1<br>
-&ensp;&ensp;<B>node2<br>
-&ensp;&ensp;<B>node3<br>
+&ensp;&ensp;<B>node1</B><br>
+&ensp;&ensp;<B>node2</B><br>
+&ensp;&ensp;<B>node3</B><br>
 
 3.分发到其他节点
 >scp  /app/opt/flink-1.6.0 node2:/app/opt/ <br>
