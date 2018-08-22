@@ -27,8 +27,12 @@
 > vim /app/opt/flink-1.6.0/conf/flink.yml 
 
 修改如下的key velues <br>
-jobmanager.rpc.address   node1
-
+<table>
+  <tr>
+   <td>jobmanager.rpc.address</td>
+   <td>node1</td>
+  </tr>
+</table>
 > vim /app/opt/flink-1.6.0/conf/slaves
 
 &ensp;&ensp;<B>node1<br>
