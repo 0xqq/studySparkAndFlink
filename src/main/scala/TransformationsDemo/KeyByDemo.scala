@@ -1,7 +1,7 @@
+package TransformationsDemo
+
 import org.apache.flink.streaming.api.TimeCharacteristic
 import org.apache.flink.streaming.api.scala.{DataStream, StreamExecutionEnvironment, createTypeInformation}
-import org.apache.flink.streaming.api.windowing.assigners.TumblingEventTimeWindows
-import org.apache.flink.streaming.api.windowing.time.Time
 
 object KeyByDemo {
   def main(args: Array[String]): Unit = {
@@ -15,6 +15,7 @@ object KeyByDemo {
     val env = StreamExecutionEnvironment.getExecutionEnvironment
     env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime)
 
+    //指定hostName用nc，进行实验，读取的是socket流的数据
     val input:DataStream[String] = env.socketTextStream(hostName, port)
     //map 释义：
     /*
