@@ -1,7 +1,8 @@
+package quickStart
+
 import org.apache.flink.api.java.utils.ParameterTool
-import org.apache.flink.streaming.api.scala.{DataStream, StreamExecutionEnvironment}
+import org.apache.flink.streaming.api.scala.{DataStream, StreamExecutionEnvironment, createTypeInformation}
 import org.apache.flink.streaming.api.windowing.time.Time
-import org.apache.flink.streaming.api.scala.createTypeInformation
 
 object wordCount {
   def main(args: Array[String]): Unit = {
@@ -21,6 +22,7 @@ object wordCount {
     // get input data by connecting to the socket
     val text: DataStream[String] = env.socketTextStream("192.168.123.123", port, '\n')
     // parse the data, group it,ignore window it, and aggregate the counts
+    //.flatMap(_.split(" "))是和spark的一样的理解
     val windowCounts = text
       .flatMap(_.split(" "))
       .map((_, 1))
