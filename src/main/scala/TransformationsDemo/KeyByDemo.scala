@@ -30,7 +30,7 @@ object KeyByDemo {
 //      print(key +" " + time + " "+ count)
       (key,time,count)
     })
-    /*keyBy释义
+    /*keyBy释义  DataStream → KeyedStream
       第一种
       可以指定指定好的case值也就是case class (id:Int, click:Int) 样例：keyBy(x=>person(x._1.toInt))
       case class person(id:Int)
@@ -40,9 +40,13 @@ object KeyByDemo {
       1> (1,2,3)
       3> 1
     */
+    /* filter() 返回的是Ture or False 该方法和spark是一样的用法
+    如果返回是True的话，则成立，将其过滤，如果是False的话，保留不被过滤
+     */
     val keyRes= key.keyBy(_._1)
+    val Res = keyRes.filter(_._1.equals(0))
     key.print()
-    keyRes.map(_._1).print()
+    Res.map(_._1).print()
 
     env.execute()
   }
