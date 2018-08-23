@@ -47,15 +47,38 @@
 4.启动flink集群和关闭flink集群
 > /app/opt/flink-1.6.0/bin/start-cluster.sh <br>
 >/app/opt/flink-1.6.0/bin/stop-***.sh
+
 ## 二、运行wordcount实例
 
-下面是代码展示：
+1.Maven的以来添加pom.xml
+
+```
+<dependency>
+  <groupId>org.apache.flink</groupId>
+  <artifactId>flink-java</artifactId>
+  <version>1.6.0</version>
+</dependency>
+<dependency>
+  <groupId>org.apache.flink</groupId>
+  <artifactId>flink-streaming-java_2.11</artifactId>
+  <version>1.6.0</version>
+</dependency>
+<dependency>
+  <groupId>org.apache.flink</groupId>
+  <artifactId>flink-clients_2.11</artifactId>
+  <version>1.6.0</version>
+</dependency>
+
+
+```
+
+下面是代码展示(scala)：
 
 ```
 import org.apache.flink.api.java.utils.ParameterTool
 import org.apache.flink.streaming.api.scala.{DataStream, StreamExecutionEnvironment}
 import org.apache.flink.streaming.api.windowing.time.Time
-import org.apache.flink.streaming.api.scala.createTypeInformation
+import org.apache.flink.streaming.api.scala.createTypeInformation  //隐式转换
 
 object wordCount {
   def main(args: Array[String]): Unit = {
@@ -88,3 +111,7 @@ object wordCount {
 }
 
 ```
+
+
+
+
