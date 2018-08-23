@@ -50,7 +50,6 @@ object reduceDemo {
     reduceRes.print()
     env.execute()
 
-
   }
 }
 
