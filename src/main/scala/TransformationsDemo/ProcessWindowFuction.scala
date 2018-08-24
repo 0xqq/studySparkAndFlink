@@ -21,14 +21,7 @@ object ProcessWindowFuction {
 
     //指定hostName用nc，进行实验，读取的是socket流的数据
     val input:DataStream[String] = env.socketTextStream(hostName, port)
-    val keyStream = input.map(f => {
-      val data:Array[String] = f.split(" ")
-      val key = data(0)
-      val time = data(1).toLong
-      //      print(key +" " + time + " "+ count)
-      (key,time)
-    })
-
+    val keyStream = input.map(f => mapFuction(f))
 
     keyStream
       .keyBy(_._1)
@@ -37,14 +30,22 @@ object ProcessWindowFuction {
 
   }
 
+
+  def mapFuction(f:Any) ={
+    val data:Array[String] = f.toString.split(" ")
+    val key = data(0)
+    val time = data(1).toLong
+    //      print(key +" " + time + " "+ count)
+    (key,time)
+  }
+
 }
-class MyProcessWindowFunction extends ProcessWindowFunction[(String, Long), String, String, TimeWindow]{
-  override def process(key: String, context: Context, input: Iterable[(String, Long)], out: Collector[String]): ()={
+class MyProcessWindowFunction extends ProcessWindowFunction[(String, Long), String, String, TimeWindow] {
+  override def process(key: String, context: Context, input: Iterable[(String, Long)], out: Collector[String])= {
     var count = 0L
     for (in <- input) {
       count = count + 1
     }
     out.collect(s"Window ${context.window} count: $count")
   }
-
 }
