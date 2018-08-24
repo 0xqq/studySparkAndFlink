@@ -24,10 +24,7 @@ object foldDemo {
     Map 是将元素中的值拉取并且可以对其进行基本的操作，
     DataStream → DataStream
      */
-    val keyedSteam= input.map(x=>{
-      val data =x.split(" ")
-      (data(0),data(1).toLong)
-    })
+    val keyedSteam= input.map(x=>mapFuction(x))
 
 
     //A fold function that, when applied on the sequence (1,2,3,4,5), emits the sequence "start-1", "start-1-2", "start-1-2-3", ...
@@ -52,5 +49,14 @@ object foldDemo {
 
     //执行flink程序
     env.execute()
+  }
+
+
+  def mapFuction(f:String) ={
+    val data:Array[String] = f.split(" ")
+    val key = data(0)
+    val time = data(1).toLong
+    //      print(key +" " + time + " "+ count)
+    (key,time)
   }
 }
