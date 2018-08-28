@@ -114,6 +114,9 @@ object wordCount {
 
 ## waterMark
 
+[下面部分引述来自这边博客，如需了解更多相关，请点击](https://blog.csdn.net/lmalds/article/details/52704170)
+
 ![avatar](https://github.com/backbook/flinkDemo/blob/master/src/main/images/waterMark.png) 
+
 
 
