@@ -50,7 +50,7 @@
 
 ## 二、运行wordcount实例
 
-1.Maven的以来添加pom.xml
+1.Maven的依赖添加pom.xml
 
 ```
 <dependency>
@@ -118,5 +118,6 @@ object wordCount {
 
 ![avatar](https://github.com/backbook/flinkDemo/blob/master/src/main/images/waterMark.png) 
 
+- 图中蓝色虚线和实线代表着watermark的时间。
 
 
