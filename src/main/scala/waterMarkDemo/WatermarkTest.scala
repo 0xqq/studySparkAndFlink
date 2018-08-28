@@ -12,6 +12,15 @@ import org.apache.flink.streaming.api.windowing.time.Time
 import org.apache.flink.streaming.api.windowing.windows.TimeWindow
 import org.apache.flink.util.Collector
 
+/*
+  程序详解：
+（1）接收socket数据
+（2）将每行数据按照字符分隔，每行map成一个tuple类型（code，time）
+（3）抽取timestamp生成watermark。并打印（code，time，格式化的time，currentMaxTimestamp，currentMaxTimestamp的格式化时间，watermark时间）。
+（4）event time每隔3秒触发一次窗口，输出（code，窗口内元素个数，窗口内最早元素的时间，窗口内最晚元素的时间，窗口自身开始时间，窗口自身结束时间）
+
+ */
+
 
 
 object WatermarkTest {

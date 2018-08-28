@@ -1,3 +1,7 @@
+
+
+[一、Flink的安装部署-standalone](src/main/markDwon/firstFlinkSteup.md)
+
 ## 一、Flink的安装部署-standalone
 1.下载flink，可以进入官网进行下载，flink是apache的顶级项目，越来越受到大家的熟悉。
 本文使用wget进行下载并且安装。<br>
@@ -74,7 +78,7 @@
 
 下面是代码展示(scala)：
 
-```
+```scala
 import org.apache.flink.api.java.utils.ParameterTool
 import org.apache.flink.streaming.api.scala.{DataStream, StreamExecutionEnvironment}
 import org.apache.flink.streaming.api.windowing.time.Time
