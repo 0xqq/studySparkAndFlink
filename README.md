@@ -56,7 +56,7 @@
 
 1.Maven的依赖添加pom.xml
 
-```
+```scala
 <dependency>
   <groupId>org.apache.flink</groupId>
   <artifactId>flink-java</artifactId>
@@ -72,7 +72,6 @@
   <artifactId>flink-clients_2.11</artifactId>
   <version>1.6.0</version>
 </dependency>
-
 
 ```
 
