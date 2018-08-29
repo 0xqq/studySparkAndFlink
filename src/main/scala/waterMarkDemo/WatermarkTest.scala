@@ -55,13 +55,11 @@ object WatermarkTest {
       var a: Watermark = null
 
       val format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS")
-      //然后才执行这个方法
+
       override def getCurrentWatermark: Watermark = {
         a = new Watermark(currentMaxTimestamp - maxOutOfOrderness)
         a
       }
-
-      //先执行这个方法
       //提取timestamp生成watermark，并且打印
       override def extractTimestamp(t: (String,Long), l: Long): Long = {
         val timestamp = t._2
