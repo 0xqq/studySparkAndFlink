@@ -25,6 +25,9 @@
         <slf4j.version>1.7.7</slf4j.version>
         <log4j.version>1.2.17</log4j.version>
         <scala.version>2.11</scala.version>
+        <flink.version>1.6.0</flink.version>
+        <json4s.version>3.3.0</json4s.version>
+        <spark.version>2.3.1</spark.version>
     </properties>
 
     <dependencies>
@@ -32,20 +35,20 @@
         <dependency>
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-clients_2.11</artifactId>
-            <version>1.6.0</version>
+            <version>${flink.version}</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.flink/flink-core -->
         <dependency>
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-core</artifactId>
-            <version>1.6.0</version>
+            <version>${flink.version}</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.apache.flink/flink-streaming-scala -->
         <dependency>
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-streaming-scala_2.11</artifactId>
-            <version>1.6.0</version>
+            <version>${flink.version}</version>
         </dependency>
 
         <!-- explicitly add a standard loggin framework, as Flink does not (in the future) have
@@ -64,8 +67,11 @@
         <dependency>
             <groupId>org.json4s</groupId>
             <artifactId>json4s-native_${scala.version}</artifactId>
-            <version>3.3.0</version>
+            <version>${json4s.version}</version>
         </dependency>
+
+
+
         
     </dependencies>
 
