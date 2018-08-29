@@ -10,6 +10,28 @@
 
 注意点：在spark和flink本地的运行需要的依赖hadoop的需要下载相应的部署安装。
 
-```
-
+- 如下是maven相关的依赖包，这是截取了片段，详细查看[maven](https://github.com/backbook/flinkDemo/blob/master/pom.xml)<br>
+```scala
+     <properties>
+        <spark.version>2.3.1</spark.version>
+     </properties>
+     <dependencies>
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-core_2.11</artifactId>
+            <version>${spark.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-streaming_2.11</artifactId>
+            <version>${spark.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-sql_2.11</artifactId>
+            <version>${spark.version}</version>
+        </dependency>
+      </dependencies>
+        
 ```
