@@ -36,3 +36,11 @@
         
 ```
 
+在开始整理这个文章的时候，我最新去的官网，可是官网都是官方性的讲解，所以对我来说确实可能不是那么友好。于是我找到了这样的一篇文章。
+[关于SparkStreaming checkpoint那些事儿](https://blog.csdn.net/rlnLo2pNEfx9c/article/details/81417061)
+
+本文开始构建项目解析其原因从spark Streaming入手，因为咱们看的是flink差异，但是spark中确实很大一部分主要是关于流式计算，在我更新的这段时间里面，流式flink算是比较火的。
+
+- spark streaming使用checkpoint的优势在哪里：可以帮助driver端`非代码逻辑`错误导致的dirver应用失败重启，比如网络，jvm等。
+但是并不是一层不变的，仅限于支持自动重启的集群管理器，比如yarn。
+- 注意点：由于checkpoint信息包含序列化的Scala / Java / Python对象，尝试使用新的修改类反序列化这些对象可能导致错误。
