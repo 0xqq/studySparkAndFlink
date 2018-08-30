@@ -20,8 +20,9 @@ object SparkStreamingCheckpoint {
       .set("spark.serializer", "org.apache.spark.serializer.KryoSerializer")
       .set("spark.driver.allowMultipleContexts","true")
     val ssc: StreamingContext = new StreamingContext(sparkConf,Seconds(2))   // new context
+    //我们可以进入到目录下查看checkpoint的变化，然后对其进行查看
     ssc.checkpoint("E:\\log")   // set checkpoint directory
-    
+
     val lines: ReceiverInputDStream[String] = ssc.socketTextStream(hostName,port)
     val words: DStream[String] = lines.flatMap(_.split(" "))
     val wordAndOne: DStream[(String, Int)] = words.map((_, 1))

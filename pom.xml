@@ -78,7 +78,9 @@
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-streaming_2.11</artifactId>
             <version>${spark.version}</version>
+            <!--<scope>在这里特别指出，因为provided是指代编译的时候需要使用这个包，所以会出现运行sparkStreaming中的时候无法找到sparkstreaming这个包，记住是版本对应的前提之下，导致的</scope>-->
             <!--<scope>provided</scope>-->
+
         </dependency>
         <dependency>
             <groupId>org.apache.spark</groupId>
