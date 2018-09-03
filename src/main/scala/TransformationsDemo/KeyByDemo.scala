@@ -29,6 +29,7 @@ object KeyByDemo {
       val count = data(2)
 //      print(key +" " + time + " "+ count)
       (key,time,count)
+      
     })
     /*keyBy释义  DataStream → KeyedStream
       第一种

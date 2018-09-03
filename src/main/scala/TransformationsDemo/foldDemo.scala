@@ -39,7 +39,6 @@ object foldDemo {
 //    val  Res:DataStream[String]=keyedSteam
 //      .keyBy(0)
 //      .fold("start")((str, i) => { str + "-" + i._2 })
-
     val  Res:DataStream[String]=keyedSteam
       .keyBy(0)
       .window(SlidingProcessingTimeWindows.of(Time.seconds(10), Time.seconds(5)))
