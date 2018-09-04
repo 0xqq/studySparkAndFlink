@@ -84,3 +84,13 @@ flink中的使用在场景中，可以打开checkpoint然后设置一些的特�
 
 对于spark来说，无疑这种序列化模式更快一点，但是当计算量大的时候，checkpoint需要付出很大的io成本，本身也有造成空间的冗余。
 但是在小数据的情况下，spark的序列化模式显然更高效一点。
+
+
+### state
+
+operator包含任何形式的状态，这些状态都必须包含在快照中。状态有很多种形式：<br>
+
+- 用户自定义状态：由于transformation函数例如（map()或者filter()直接创建或者修改的状态，用户自定义状态可以是：转换函数中的Java对象的一个简单函数关联的key/vulue。），参见 [State in Streaming Applications](https://ci.apache.org/projects/flink/flink-docs-release-1.2/dev/stream/state.html)
+- 系统状态：这种状态是指作为operator计算中一部分缓存数据。典型例子就是：窗口缓存（window buffers），系统收集窗口对应数据到其中，知道窗口计算和发射。
+
+operator 在收到所有输入数据流中的 barrier 之后，在发射 barrier 到其输出流之前对其状态进行快照。此时，在 barrier 之前的数据对状态的更新已经完成，不会再依赖 barrier 之前数据。由于快照可能非常大，所以后端存储系统可配置。默认是存储到 JobManager 的内存中，但是对于生产系统，需要配置成一个可靠的分布式存储系统（例如 HDFS）。状态存储完成后，operator 会确认其 checkpoint 完成，发射出 barrier 到后续输出流。
