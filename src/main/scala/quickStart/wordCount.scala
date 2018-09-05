@@ -27,7 +27,6 @@ object wordCount {
       .flatMap(_.split(" "))
       .map((_, 1))
       .keyBy(_._1)
-      .timeWindow(Time.seconds(5), Time.seconds(1))
       .sum(1)
     // print the results with a single thread, rather than in parallel
     windowCounts.print().setParallelism(1)
