@@ -17,11 +17,8 @@
     <orderEntry type="library" name="scala-sdk-2.11.7" level="project" />
     <orderEntry type="library" name="Maven: org.apache.flink:flink-clients_2.11:1.6.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.flink:flink-runtime_2.11:1.6.0" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.flink:flink-queryable-state-client-java_2.11:1.6.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.flink:flink-hadoop-fs:1.6.0" level="project" />
     <orderEntry type="library" name="Maven: commons-io:commons-io:2.4" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.flink:flink-shaded-netty:4.1.24.Final-4.0" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.flink:flink-shaded-guava:18.0-4.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.flink:flink-shaded-jackson:2.7.9-4.0" level="project" />
     <orderEntry type="library" name="Maven: org.javassist:javassist:3.19.0-GA" level="project" />
     <orderEntry type="library" name="Maven: com.typesafe.akka:akka-actor_2.11:2.4.20" level="project" />
@@ -51,6 +48,9 @@
     <orderEntry type="library" name="Maven: commons-collections:commons-collections:3.2.2" level="project" />
     <orderEntry type="library" name="Maven: org.apache.commons:commons-compress:1.4.1" level="project" />
     <orderEntry type="library" name="Maven: org.tukaani:xz:1.0" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.flink:flink-queryable-state-client-java_2.11:1.6.0" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.flink:flink-shaded-netty:4.1.24.Final-4.0" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.flink:flink-shaded-guava:18.0-4.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.flink:flink-streaming-scala_2.11:1.6.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.flink:flink-streaming-java_2.11:1.6.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.flink:flink-scala_2.11:1.6.0" level="project" />
