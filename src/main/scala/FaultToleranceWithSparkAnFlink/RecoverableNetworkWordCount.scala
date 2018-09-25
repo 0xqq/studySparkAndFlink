@@ -12,6 +12,7 @@ import org.apache.spark.util.{IntParam, LongAccumulator}
 
 
 
+
 // scalastyle:on println
 
 object DroppedWordsCounter {
@@ -86,7 +87,7 @@ object RecoverableNetworkWordCount {
     println("Creating new context")
     val outputFile = new File(outputPath)
     if (outputFile.exists()) outputFile.delete()
-    val sparkConf = new SparkConf().setAppName("RecoverableNetworkWordCount")
+    val sparkConf = new SparkConf().setAppName("RecoverableNetworkWordCount").setMaster("local[*]")
     // Create the context with a 1 second batch size
     val ssc = new StreamingContext(sparkConf, Seconds(1))
     ssc.checkpoint(checkpointDirectory)
@@ -99,6 +100,7 @@ object RecoverableNetworkWordCount {
     wordCounts.foreachRDD { (rdd: RDD[(String, Int)], time: Time) =>
       // Get or register the blacklist Broadcast
       val blacklist = WordBlacklist.getInstance(rdd.sparkContext)
+      print(blacklist)
       // Get or register the droppedWordsCounter Accumulator
       val droppedWordsCounter = DroppedWordsCounter.getInstance(rdd.sparkContext)
       // Use blacklist to drop words and use droppedWordsCounter to count them
