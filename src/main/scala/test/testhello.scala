@@ -1,8 +1,8 @@
 package test
 
-class testhello {
+object testhello {
   def main(args: Array[String]): Unit = {
-    print("hello wordcount")
-    print(1)
+    val arr =  Array("231 33")
+    print(args.mkString("[",", ","]"))
   }
 }
