@@ -1,6 +1,6 @@
 package FaultToleranceWithSparkAnFlink
 
-import org.apache.spark.SparkConf
+import org.apache.spark.{SparkConf, sql}
 import org.apache.spark.rdd.RDD
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.storage.StorageLevel
@@ -13,7 +13,7 @@ object SqlNetworkWordCount {
       System.exit(1)
     }
     // Create the context with a 2 second batch size
-    val sparkConf = new SparkConf().setAppName("SqlNetworkWordCount")
+    val sparkConf = new SparkConf().setAppName("SqlNetworkWordCount").setMaster("local[*]")
     val ssc = new StreamingContext(sparkConf, Seconds(2))
 
     val lines = ssc.socketTextStream(args(0), args(1).toInt, StorageLevel.MEMORY_AND_DISK_SER)
@@ -25,7 +25,7 @@ object SqlNetworkWordCount {
       import spark.implicits._
 
       // Convert RDD[String] to RDD[case class] to DataFrame
-      val wordsDataFrame = rdd.map(w => Record(w)).toDF()
+      val wordsDataFrame: sql.DataFrame = rdd.map(w => Record(w)).toDF()
 
       // Creates a temporary view using the DataFrame
       wordsDataFrame.createOrReplaceTempView("words")
@@ -37,6 +37,9 @@ object SqlNetworkWordCount {
       wordCountsDataFrame.show()
     }
 
+
+    ssc.start()
+    ssc.awaitTermination()
 
   }
 }
