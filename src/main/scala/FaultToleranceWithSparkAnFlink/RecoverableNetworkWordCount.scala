@@ -79,8 +79,7 @@ object WordBlacklist {
   */
 object RecoverableNetworkWordCount {
 
-  def createContext(ip: String, port: Int, outputPath: String, checkpointDirectory: String)
-  : StreamingContext = {
+  def createContext(ip: String, port: Int, outputPath: String, checkpointDirectory: String): StreamingContext = {
 
     // If you do not see this printed, that means the StreamingContext has been loaded
     // from the new checkpoint
@@ -100,12 +99,13 @@ object RecoverableNetworkWordCount {
     wordCounts.foreachRDD { (rdd: RDD[(String, Int)], time: Time) =>
       // Get or register the blacklist Broadcast
       val blacklist = WordBlacklist.getInstance(rdd.sparkContext)
-      print(blacklist)
+      print("--------------------------"+blacklist.value)
       // Get or register the droppedWordsCounter Accumulator
       val droppedWordsCounter = DroppedWordsCounter.getInstance(rdd.sparkContext)
       // Use blacklist to drop words and use droppedWordsCounter to count them
       val counts = rdd.filter { case (word, count) =>
         if (blacklist.value.contains(word)) {
+          print("进来了" + word)
           droppedWordsCounter.add(count)
           false
         } else {
