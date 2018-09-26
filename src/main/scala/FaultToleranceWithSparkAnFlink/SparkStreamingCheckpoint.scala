@@ -1,6 +1,8 @@
 package FaultToleranceWithSparkAnFlink
 
 
+import java.sql.DriverManager
+
 import org.apache.spark.SparkConf
 import org.apache.spark.streaming.dstream.{DStream, ReceiverInputDStream}
 import org.apache.spark.streaming.{Seconds, StreamingContext}
@@ -41,6 +43,19 @@ object SparkStreamingCheckpoint {
     totalWordCounts.print()
 
 
+//    wordAndOne.reduceByKey(_+_).foreachRDD(rdd=>{
+//            rdd.foreachPartition(
+//              partitionOfRecords =>{
+//                  val  connection = createConnection()
+//                  partitionOfRecords.foreach(record => {
+//                    val sql = "insert into wordCount(word,wordCount) values( '"+ record._1 + "'" + record._2 + ")"
+//                    connection.createStatement().execute(sql)
+//                  })
+//                  connection.close()
+//              }
+//            )
+//          })
+
 //    val wordCount: DStream[(String, Int)] = wordAndOne.reduceByKey(_ + _)
 //    wordCount.print()
 
@@ -48,7 +63,10 @@ object SparkStreamingCheckpoint {
     ssc.start()       // Start the computation
     ssc.awaitTermination()     // Wait for the computation to terminate
   }
-
+//  def createConnection() = {
+//    Class.forName("com.mysql.jdbc.Driver")
+//    DriverManager.getConnection("jdbc:mysql://cdh01:3306/spark_streaming","root","Whcyit123!@#")
+//  }
 
 
 }

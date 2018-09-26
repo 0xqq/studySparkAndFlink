@@ -201,5 +201,6 @@
     <orderEntry type="library" name="Maven: joda-time:joda-time:2.9.9" level="project" />
     <orderEntry type="library" name="Maven: com.carrotsearch:hppc:0.7.2" level="project" />
     <orderEntry type="library" name="Maven: com.vlkan:flatbuffers:1.2.0-3f79e055" level="project" />
+    <orderEntry type="library" name="Maven: mysql:mysql-connector-java:5.1.31" level="project" />
   </component>
 </module>
