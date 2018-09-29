@@ -21,6 +21,8 @@ object reduceByKeyAndWindowDemo {
    val windowedWordCounts: DStream[(String, Int)] = wordAndOne.reduceByKeyAndWindow((a:Int,b:Int)=>(a + b),Seconds(5),Seconds(1))
     windowedWordCounts.print()
 
+
+    //将数据写入到MYSQL中
     wordAndOne.reduceByKey(_+_).foreachRDD(rdd=>{
             rdd.foreachPartition(
               partitionOfRecords =>{
