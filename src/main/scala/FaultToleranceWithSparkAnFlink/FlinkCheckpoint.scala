@@ -25,6 +25,7 @@ object FlinkCheckpoint {
     val env: StreamExecutionEnvironment = StreamExecutionEnvironment.getExecutionEnvironment
     // get input data by connecting to the socket
 
+
     //在这里进行设置checkpoint,1000的意思是每1000ms进行开启检查点
     env.enableCheckpointing(1000)
     // set mode to exactly-once (this is the default)
@@ -37,7 +38,6 @@ object FlinkCheckpoint {
     env.getCheckpointConfig.setMaxConcurrentCheckpoints(1)
     // enable externalized checkpoints which are retained after job cancellation
     env.getCheckpointConfig.enableExternalizedCheckpoints(ExternalizedCheckpointCleanup.RETAIN_ON_CANCELLATION)
-    
 
     val text: DataStream[String] = env.socketTextStream("39.108.170.235", port, '\n')
     // parse the data, group it,ignore window it, and aggregate the counts

@@ -23,13 +23,13 @@ object UpdateState {
 
 
 //    totalWordCounts.foreachRDD(rdd=>{
-//      val  connection = createConnection()
-//      rdd.foreach{
-//        record =>
-//          val sql = "insert into wordCount(word,wordCount) values( '"+ record._1 + "'" + record._2 + ")"
-//          connection.createStatement().execute(sql)
-//      }
-//    })
+    ////      val  connection = createConnection()
+    ////      rdd.foreach{
+    ////        record =>
+    ////          val sql = "insert into wordCount(word,wordCount) values( '"+ record._1 + "'" + record._2 + ")"
+    ////          connection.createStatement().execute(sql)
+    ////      }
+    ////    })
 
     totalWordCounts.print()
 
