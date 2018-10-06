@@ -1,5 +1,4 @@
 package SparkStructuredStreaming
-import org.apache.spark.sql.functions._
 import org.apache.spark.sql.SparkSession
 
 
@@ -17,9 +16,12 @@ object QuickExample {
     import spark.implicits._
     val lines = spark.readStream
       .format("socket")
-      .option("host", "39.108.170.235")
+      .option("host", "localhost")
       .option("port", 9999)
       .load()
+
+    lines.isStreaming
+    lines.printSchema()
 
     // Split the lines into words
     val words = lines.as[String].flatMap(_.split(" "))
