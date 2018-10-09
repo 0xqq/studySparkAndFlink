@@ -1,8 +1,7 @@
 package SparkStructuredStreaming.kafkaStreaming
 
-import org.apache.spark.sql.SparkSession
+import org.apache.spark.sql.{Encoders, SparkSession}
 import org.apache.spark.sql.streaming.{OutputMode, ProcessingTime}
-import org.apache.spark.sql.types.StructType
 
 object JSONDemo {
   def main(args: Array[String]): Unit = {
@@ -13,25 +12,21 @@ object JSONDemo {
       .appName("StructuredStreamingDemo")
       .getOrCreate()
 
-    
     import spark.implicits._
-
-    //  定义schema
-    val userSchema = new StructType().add("name", "string").add("age", "integer")
-
+    val schema = Encoders.product[CdrData].schema
     // 读取数据
     val dataFrameStream = spark
       .readStream
-      .option("sep",",")
-      .schema(userSchema)
+      .format("json")
+      .option("timestampFormat", "yyyy/MM/dd HH:mm:ss ZZ")
+      .schema(schema)
       //只能是监控目录，当新的目录进来时，再进行计算
-      .csv("file:///Users/backbook/data/csv/")
-
+      .load("/Users/backbook/data/json/")
 
     //在控制台监控
     val query = dataFrameStream.writeStream
       //complete,append,update。目前只支持前面两种
-      .outputMode(OutputMode.Append)
+      .outputMode(OutputMode.Update())
       //console,parquet,memory,foreach 四种
       .format("console")
       .trigger(ProcessingTime(500))
@@ -40,3 +35,5 @@ object JSONDemo {
     query.awaitTermination()
   }
 }
+
+case class CdrData(reId: String, ratingFlowId: String, workFlowId: String)
