@@ -24,7 +24,7 @@ object StreamingToHbase {
 
     lines.createTempView("Originalkafka")
     import spark.sql
-    val count=sql("select * from Originalkafka ")
+    val count=sql("select value from Originalkafka ")
 
 
     val query =count.writeStream
