@@ -1,15 +1,22 @@
 package SparkStructuredStreaming.kafkaStreaming
 
-import SparkStructuredStreaming.customSink.HbaseSink
+import java.sql.Connection
+
+import SparkStructuredStreaming.customSink.JDBCSink
+import org.apache.spark.SparkConf
 import org.apache.spark.sql.SparkSession
 
-object StreamingToHbase {
+object StreamingToMysql {
 
   def main(args: Array[String]): Unit = {
-    val spark=SparkSession
+
+    val conf = new SparkConf()
+    conf.registerKryoClasses(Array(classOf[org.apache.commons.pool2.impl.GenericObjectPool[Connection]]))
+     val spark=SparkSession
       .builder
       .appName("testWriteResultToHbase")
       .master("local")
+       .config(conf)
       .getOrCreate()
 
 
@@ -25,13 +32,12 @@ object StreamingToHbase {
 
     lines.createTempView("Originalkafka")
     import spark.sql
-    val value=sql("select value from Originalkafka ")
-
+    val value=sql("select value from Originalkafka")
 
 
     val query =value.writeStream
       .outputMode("append")
-      .foreach(new HbaseSink("localhost:2181","hdfs://localhost:8020/hbase","structured_streaming_hbase","info"))
+      .foreach(new JDBCSink())
       .queryName("test")
       .format("foreach")
       .start()

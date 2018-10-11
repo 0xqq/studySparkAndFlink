@@ -1,13 +1,16 @@
 package ThreadPool
 import java.sql.{Connection, DriverManager}
+
 import org.apache.commons.pool2.impl.{DefaultPooledObject, GenericObjectPool}
 import org.apache.commons.pool2.{BasePooledObjectFactory, PooledObject}
 
 
 
-object MysqlConnectionPool {
 
-  private val pool = new GenericObjectPool[Connection](new MysqlConnectionFactory("jdbc:mysql://192.168.123.123:3306/spark_streaming", "root", "Whcyit123!@#", "com.mysql.jdbc.Driver"))
+object MysqlConnectionPool extends Serializable {
+
+  private  val pool = new GenericObjectPool[Connection](new MysqlConnectionFactory("jdbc:mysql://localhost:3306/StructruedStreaming", "root", "Server2008!", "com.mysql.jdbc.Driver"))
+//  private  val pool = new GenericObjectPool[Connection](new MysqlConnectionFactory(url,userName,password,"com.mysql.jdbc.Driver"))
 
 
   def getConnection(): Connection ={
@@ -17,10 +20,11 @@ object MysqlConnectionPool {
   def returnConnection(conn: Connection): Unit ={
     pool.returnObject(conn)
   }
-
-
 }
-class MysqlConnectionFactory(url: String, userName: String, password: String, className: String) extends BasePooledObjectFactory[Connection]{
+
+
+@transient
+class MysqlConnectionFactory(url: String, userName: String, password: String, className: String) extends BasePooledObjectFactory[Connection] {
   override def create(): Connection = {
     Class.forName(className)
     DriverManager.getConnection(url, userName, password)

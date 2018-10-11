@@ -138,12 +138,16 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>${mysql.version}</version>
         </dependency>
-
-
-
+        <!-- https://mvnrepository.com/artifact/RedisLabs/spark-redis -->
+        <dependency>
+            <groupId>RedisLabs</groupId>
+            <artifactId>spark-redis</artifactId>
+            <version>0.3.2</version>
+        </dependency>
 
 
     </dependencies>
+
 
     <build>
         <plugins>
@@ -210,6 +214,7 @@
                     </execution>
                 </executions>
             </plugin>
+
 
 
             <!--

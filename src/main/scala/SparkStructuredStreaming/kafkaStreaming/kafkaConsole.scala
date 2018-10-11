@@ -35,16 +35,17 @@ object kafkaConsole {
     // Split the lines into words
     val words = lines.as[String].flatMap(_.split(" "))
 
+
+
     // Generate running word count
     val wordCounts = words.groupBy("value").count()
-
 
     val query = wordCounts
       .writeStream
       .queryName("a").
       trigger(ProcessingTime(10))
       .format("console")
-      .outputMode(OutputMode.Complete())
+      .outputMode(OutputMode.Append())
       .start()
 
     query.awaitTermination()

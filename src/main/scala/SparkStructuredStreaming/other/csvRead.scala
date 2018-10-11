@@ -1,7 +1,7 @@
-package SparkStructuredStreaming.kafkaStreaming
+package SparkStructuredStreaming.other
 
 import org.apache.spark.sql.SparkSession
-import org.apache.spark.sql.streaming.{OutputMode, ProcessingTime}
+import org.apache.spark.sql.streaming.ProcessingTime
 import org.apache.spark.sql.types.StructType
 
 object csvRead {

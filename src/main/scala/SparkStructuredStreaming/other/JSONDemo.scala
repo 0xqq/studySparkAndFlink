@@ -1,4 +1,4 @@
-package SparkStructuredStreaming.kafkaStreaming
+package SparkStructuredStreaming.other
 
 import org.apache.spark.sql.{Encoders, SparkSession}
 import org.apache.spark.sql.streaming.{OutputMode, ProcessingTime}
