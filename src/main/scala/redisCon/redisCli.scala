@@ -1,22 +1,28 @@
 package redisCon
 
-import redis.clients.jedis.Jedis
+import redis.clients.jedis.{Jedis, JedisPool, JedisPoolConfig}
 
 object redisCli {
   def main(args: Array[String]): Unit = {
+    var jrconf: JedisPoolConfig = null
+    var jrpool: JedisPool = null
     var jr: Jedis = null
     try {
-      jr = new Jedis("127.0.0.1",6379)
-      println(jr.ping())
-      System.out.println(jr.isConnected && jr.ping.equals("PONG"))
-      val key = "h*"
-      val res = jr.keys(key)
-      print(res)
+      jrconf = new JedisPoolConfig()
+      jrconf.setMaxTotal(10)
+      jrpool = new JedisPool(jrconf,"localhost",6379)
 
-
+      jr = jrpool.getResource()
+      println(jr.keys("h*"))
+      
     }catch {
       case t =>
         t.printStackTrace()
+    } finally {
+      //还回pool中
+      if(jr != null){
+        jr.close();
+      }
     }
   }
 }
