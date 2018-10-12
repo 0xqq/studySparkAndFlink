@@ -1,5 +1,8 @@
 package redisCon
 
+
+//在使用jedis的时候，api已经实现就业commons-pool2的jedis的线程池
+
 import redis.clients.jedis.{Jedis, JedisPool, JedisPoolConfig}
 
 object redisCli {
@@ -14,7 +17,7 @@ object redisCli {
 
       jr = jrpool.getResource()
       println(jr.keys("h*"))
-      
+
     }catch {
       case t =>
         t.printStackTrace()
@@ -24,5 +27,6 @@ object redisCli {
         jr.close();
       }
     }
+    jrpool.close()
   }
 }
