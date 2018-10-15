@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<configuration>
+        <!-- （mysql地址localhost） -->
+        <property>
+                <name>javax.jdo.option.ConnectionURL</name>
+                <value>jdbc:mysql://localhost:3306/hive</value>
+        </property>
+        <!-- （mysql的驱动） -->
+        <property>
+                <name>javax.jdo.option.ConnectionDriverName</name>
+                <value>com.mysql.jdbc.Driver</value>
+        </property>  -->
+        <property>
+          <name>javax.jdo.option.ConnectionURL</name>
+           <value>jdbc:mysql://localhost:3306/hive?createDatabaseIfNotExist=true&amp;characterEncoding=UTF-8</value>
+           <description>JDBC connect string for a JDBC metastore</description>
+        </property>
+
+        <property>
+                <name>javax.jdo.option.ConnectionUserName</name>
+                <value>root</value>
+        </property>
+        <!-- （密码） -->
+        <property>
+                <name>javax.jdo.option.ConnectionPassword</name>
+                <value>Server2008!</value>
+        </property>
+ 
+        <property>
+                <name>hive.metastore.schema.verification</name>
+                <value>false</value>
+        </property>
+</configuration>
+

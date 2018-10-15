@@ -3,7 +3,7 @@ package redisCon
 
 //在使用jedis的时候，api已经实现就业commons-pool2的jedis的线程池
 
-import redis.clients.jedis.{Jedis, JedisPool, JedisPoolConfig}
+import redis.clients.jedis.{Jedis, JedisPool, JedisPoolConfig, Pipeline}
 
 object redisCli {
   def main(args: Array[String]): Unit = {
@@ -16,7 +16,7 @@ object redisCli {
       jrpool = new JedisPool(jrconf,"localhost",6379)
 
       jr = jrpool.getResource()
-      println(jr.keys("h*"))
+      println(jr.ping())
 
     }catch {
       case t =>
