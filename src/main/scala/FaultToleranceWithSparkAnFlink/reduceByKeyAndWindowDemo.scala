@@ -13,7 +13,7 @@ object reduceByKeyAndWindowDemo {
     val ssc = new StreamingContext(sparkConf, Seconds(1))
 
     //使用socketTextStream 监听端口
-    var lines:ReceiverInputDStream[String] = ssc.socketTextStream("39.108.170.235", 9999)
+    var lines:ReceiverInputDStream[String] = ssc.socketTextStream("localhost", 9999)
 
     val words: DStream[String] = lines.flatMap(_.split(" "))
     val wordAndOne: DStream[(String, Int)] = words.map((_, 1))
