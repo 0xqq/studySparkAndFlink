@@ -24,6 +24,8 @@ public class HDFS2HBaseApp {
             String[] splits = value.toString().split(" ");
             rowkey.set(Bytes.toBytes(splits[0]));
 
+            
+
             Put put = new Put(Bytes.toBytes(splits[0]));
             put.addColumn(Bytes.toBytes("info"), Bytes.toBytes("gender"), Bytes.toBytes(splits[1]));
             put.addColumn(Bytes.toBytes("info"), Bytes.toBytes("age"), Bytes.toBytes(splits[2]));
