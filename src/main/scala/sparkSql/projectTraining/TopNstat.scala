@@ -6,7 +6,11 @@ import org.apache.spark.sql.functions._
 
 import scala.collection.mutable.ListBuffer
 
+
+
 object TopNstat {
+
+
   def main(args: Array[String]): Unit = {
     val spark = SparkSession.builder().appName("TopNstat").
       config("spark.sql.sources.partitionColumnTypeInference.enabled","false").
@@ -17,34 +21,37 @@ object TopNstat {
     //最受欢迎的TopN课程
     //videAccessTopNStat(spark,accessDF)
     //按照地市进行统计TopN课程
-    cityAccessTopNStat(spark,accessDF)
+//    cityAccessTopNStat(spark,accessDF)
 
+    //按照流量进行统计
+    videoTrafficsTopNstat(spark,accessDF)
 
     spark.stop()
 
   }
 
-  def videAccessTopNStat(spark: SparkSession,aceessDF:DataFrame)={
+  def videAccessTopNStat(spark: SparkSession, accessDF:DataFrame)={
     import spark.implicits._
 
     //在使用$符号的时候，要进行隐式转换，不然无法进行交换
-   val topNStatDF =  aceessDF.filter($"day" === "20170511" && $"cmsType" === "video")
+   val topNStatDF =  accessDF.filter($"day" === "20170511" && $"cmsType" === "video")
       .groupBy("day","cmsId").agg(count("cmsId").as("times"))
       .orderBy($"times".desc)
     topNStatDF.show(false)
   }
 
-  def cityAccessTopNStat(spark: SparkSession,aceessDF:DataFrame)={
+  def cityAccessTopNStat(spark: SparkSession,accessDF:DataFrame)={
+    //引入隐式转换的意义在于能够在一定作用域在进行相应的方法的引用
     import spark.implicits._
 
     //在使用$符号的时候，要进行隐式转换，不然无法进行交换
-    val cityTopNStatDF =  aceessDF.filter($"day" === "20170511" && $"cmsType" === "video")
+    val cityTopNStatDF =  accessDF.filter($"day" === "20170511" && $"cmsType" === "video")
       .groupBy("day","city","cmsId").agg(count("cmsId").as("times"))
 
    val  top3 =  cityTopNStatDF.select(cityTopNStatDF("day"),
       cityTopNStatDF("city"),
       cityTopNStatDF("cmsId"),
-      cityTopNStatDF("times"),
+      cityTopNStatDF("tim6es"),
       row_number().over(Window.partitionBy(cityTopNStatDF("city"))
         .orderBy(cityTopNStatDF("times").desc)
         ).as("times_rank"))
@@ -67,11 +74,22 @@ object TopNstat {
     }catch {
       case e:Exception => e.printStackTrace()
     }
-
-
   }
 
 
+
+//按照流量进行统计
+  def videoTrafficsTopNstat(spark: SparkSession, accessDF: DataFrame) = {
+
+    import spark.implicits._
+    //在使用$符号的时候，要进行隐式转换，不然无法进行交换
+    val videoTrafficTopNStat =  accessDF.filter($"day" === "20170511" && $"cmsType" === "video")
+      .groupBy("day","cmsId").agg(sum("traffic").as("traffics"))
+      .orderBy($"traffics".desc)
+      .show()
+
+
+}
 
 
 
