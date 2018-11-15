@@ -9,7 +9,7 @@ object dataFrameApi {
 
     val  spark = SparkSession.builder().appName("dataFrameApp").master("local[2]").getOrCreate()
 
-    val  peopleDF =   spark.read.format("json").load("file:///Users/backbook/data/json/test.json")
+    val  peopleDF =  spark.read.format("json").load("file:///Users/backbook/data/json/test.json")
 
     peopleDF.printSchema()
 

@@ -44,6 +44,7 @@ object TopNstat {
     //引入隐式转换的意义在于能够在一定作用域在进行相应的方法的引用
     import spark.implicits._
 
+
     //在使用$符号的时候，要进行隐式转换，不然无法进行交换
     val cityTopNStatDF =  accessDF.filter($"day" === "20170511" && $"cmsType" === "video")
       .groupBy("day","city","cmsId").agg(count("cmsId").as("times"))
@@ -76,8 +77,6 @@ object TopNstat {
     }
   }
 
-
-
 //按照流量进行统计
   def videoTrafficsTopNstat(spark: SparkSession, accessDF: DataFrame) = {
 
@@ -86,7 +85,6 @@ object TopNstat {
     val videoTrafficTopNStat =  accessDF.filter($"day" === "20170511" && $"cmsType" === "video")
       .groupBy("day","cmsId").agg(sum("traffic").as("traffics"))
       .orderBy($"traffics".desc)
-      .show()
 
 
 }

@@ -11,6 +11,8 @@ object studentDataFrame {
       .master("local[2]")
       .getOrCreate()
 
+    spark.sparkContext.setLogLevel("WARN")
+
     val stuRDD:RDD[String]= spark.sparkContext.textFile("/Users/backbook/data/txt/sudent.data")
     import spark.implicits._
     val  stuDF: sql.DataFrame  =  stuRDD.map(_.split("\\|")).map(line => Student(line(0).toInt,line(1),line(2),line(3),line(4))).toDF()
@@ -20,9 +22,6 @@ object studentDataFrame {
     println(count)
 
     stuDF.filter("name = ''").head(2).foreach(println)
-
-
-
   }
 
   case class Student(id:Int,name:String,phone:String,company:String,address:String)
